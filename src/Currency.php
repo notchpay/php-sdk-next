@@ -4,7 +4,10 @@ namespace NotchPay;
 
 class Currency extends ApiResource
 {
-    const OBJECT_NAME = 'currencies';
-
     use ApiOperations\All;
+
+    public static function list(): array|object
+    {
+        return self::staticRequest('GET', 'currencies');
+    }
 }

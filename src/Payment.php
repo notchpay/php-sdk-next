@@ -25,6 +25,17 @@ class Payment extends ApiResource
     }
 
     /**
+     * Init a charge for customer
+     * @throws InvalidArgumentException
+     */
+    public static function charge(string $reference, array $params): array|object
+    {
+        self::validateParams($params, true);
+
+        return static::staticRequest('POST', "payment/{$reference}", $params);
+    }
+
+    /**
      *
      * @link https://developer.notchpay.co/#transaction-verify
      *
@@ -62,5 +73,20 @@ class Payment extends ApiResource
         $url = static::endPointUrl($reference);
 
         return static::staticRequest('DELETE', $url);
+    }
+
+    public static function list(array $params): array|object
+    {
+        self::validateParams($params, true);
+        return static::staticRequest('GET', "payments", $params);
+    }
+
+    /**
+     * This endpoint makes an HTTP GET request to search for payments based on the provided query parameter
+     */
+    public static function search(array $params): array|object
+    {
+        self::validateParams($params, true);
+        return static::staticRequest('GET', "payments/search", $params);
     }
 }

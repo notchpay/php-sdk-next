@@ -4,7 +4,10 @@ namespace NotchPay;
 
 class Country extends ApiResource
 {
-    const OBJECT_NAME = 'countries';
-
     use ApiOperations\All;
+    
+    public static function list(): array|object
+    {
+        return self::staticRequest('GET', 'countries');
+    }
 }

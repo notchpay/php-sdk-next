@@ -94,6 +94,45 @@ After we redirect to your callback, please verify the transaction before giving 
 
 ```
 
+### Make an undirect tranfers
+
+> To make a direct transfer you should provide us a beneficiary id, name and phone number
+
+```php
+    // initiate the Library's NotchPay Object
+    NotchPay::setApiKey('sk_1234abcd');
+
+try {
+    $beneficiary = Recipient::create([
+            "name" => "Benjamin Maggio",
+            "channel" => "cm.mobile",
+            "number" => "+237695782464", // Number to receive found
+            "phone" => "+237695782495", // Recipient phone number (contact only)
+            "email" => "hello@notchpay.qw",
+            "country" => "CM",
+            "description" => "Test description",
+            "reference" => "3RAV4gZLesBAXTrwiuUDLnJGSDESSEWF"
+        ]);
+
+    $transfer = Transfer::direct([
+            "amount" => "15",
+            "currency" => "XAF",
+            "description" => "Test description",
+            "recipient" => $beneficiary->recipient->id,
+            "channel" => "cm.mobile",
+            "beneficiary" => [
+                    'name' => $beneficiary->recipient->name,
+                    'number' => $beneficiary->recipient->phone
+                ]
+        ]);
+
+} catch(\NotchPay\Exceptions\ApiException $e){
+    print_r($e->errors);
+    die($e->getMessage());
+}
+
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

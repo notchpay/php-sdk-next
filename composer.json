@@ -32,6 +32,11 @@
             "email": "hello@digikraaft.ng",
             "homepage": "https://digikraaft.com",
             "role": "Base credit"
+        },
+        {
+            "name": "Stevy Endaman",
+            "email": "endamanstevy@gmail.com",
+            "role": "Developper"
         }
     ],
     "require": {
@@ -40,20 +45,27 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "mockery/mockery": "^1.4",
-        "php-coveralls/php-coveralls": "^2.2",
-        "phpunit/phpunit": "^9.0",
-        "scrutinizer/ocular": "^1.7",
-        "vimeo/psalm": "^3.11"
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.7",
+        "phpstan/phpstan": "^2.0"
     },
     "autoload": {
         "psr-4": {
             "NotchPay\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "process-timeout": 1200,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

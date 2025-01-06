@@ -11,6 +11,33 @@ class Customer extends ApiResource
     use ApiOperations\Fetch;
     use ApiOperations\Update;
 
+    public function create(array $params): array|object
+    {
+        self::validateParams($params, true);
+
+        return static::staticRequest('POST', "customers", $params);
+    }
+
+    public static function list()
+    {
+        return self::staticRequest('GET', "customers");
+    }
+
+    public static function verify(string $reference): array|object
+    {
+        return static::staticRequest('GET', "customers/{$reference}");
+    }
+
+    public static function update(string $reference, array $params): array|object
+    {
+        return static::staticRequest('POST', "customers/{$reference}", $params);
+    }
+
+    public static function paymentMethods(string $reference): array|object
+    {
+        return static::staticRequest('GET', "customers/{$reference}/payment_methods");
+    }
+
     /**
      * @param string $customerId containing the id of the customer to block
      *
